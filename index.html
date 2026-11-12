@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Pirmoji eilutė naršyklei pasako: tai šiuolaikinis HTML dokumentas. -->
+<html lang="lt">
+<head>
+  <!-- <head> dalyje – informacija apie puslapį, kurios pačiame puslapyje nematyti. -->
+  <meta charset="utf-8">
+  <!-- Be šios eilutės telefonas rodytų sumažintą „kompiuterinį“ vaizdą. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Prašome paieškos sistemų šio puslapio nerodyti – svetainė skirta šeimai. -->
+  <meta name="robots" content="noindex">
+  <!-- Piktograma naršyklės skirtuke, nupiešta čia pat (SVG), be atskiro failo. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b6e4f'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+  <title>Finansų skaičiuoklės</title>
+  <!-- Prijungiame bendrą stilių failą. Kelias santykinis – nuo šio failo vietos. -->
+  <link rel="stylesheet" href="css/stilius.css">
+</head>
+<body>
+  <!-- <body> dalyje – viskas, ką mato žmogus. -->
+  <header>
+    <h1>Finansų skaičiuoklės</h1>
+    <p>Paprasti įrankiai asmeniniams finansams planuoti.</p>
+  </header>
+
+  <main>
+    <h2>Skaičiuoklės</h2>
+    <!-- class="..." – vardas, pagal kurį CSS faile randame šį elementą. -->
+    <ul class="korteles">
+      <li>
+        <a class="kortele" href="biudzetas.html">
+          <span class="kortele-pavadinimas">Mėnesio biudžetas</span>
+          <span class="blankus">
+            Pajamos ir išlaidos pagal kategorijas, 50/30/20 taisyklė, planas ir faktas kiekvienam mėnesiui,
+            metų apžvalga.
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="kortele" href="investavimas.html">
+          <span class="kortele-pavadinimas">Investavimas</span>
+          <span class="blankus">
+            Periodinio investavimo į ETF prognozė trimis scenarijais: fondo mokesčiai, infliacija, GPM,
+            grafikas ir įmokų žurnalas.
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <h2>Privatumas</h2>
+    <div class="kortele">
+      <p>
+        Viskas, ką įvedate, saugoma tik jūsų naršyklėje šiame įrenginyje. Niekas niekur nesiunčiama:
+        nėra paskyrų, slapukų, reklamos ar lankytojų sekimo.
+      </p>
+      <p>
+        Kitame įrenginyje ar kitoje naršyklėje duomenys bus atskiri. Perkelti juos galima atsargine kopija –
+        mygtukas „Išsaugoti kopiją“ yra kiekvienos skaičiuoklės apačioje. Išvalius naršyklės duomenis
+        įvestys dingsta, todėl kopiją verta kartais išsaugoti.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Skaičiuoklės yra orientacinės – tai nėra finansinis, investavimo ar mokesčių patarimas.
+      Mokesčių tarifus pasitikrinkite VMI.
+    </p>
+    <p><a href="testai.html">Skaičiavimų patikra (automatiniai testai)</a></p>
+  </footer>
+</body>
+</html>

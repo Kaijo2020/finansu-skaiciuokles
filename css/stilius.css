@@ -1,0 +1,838 @@
+/* Bendras visų puslapių stilius.
+   Rašoma „pirmiausia telefonui“: pagrindinės taisyklės skirtos siauram ekranui,
+   o failo gale esantis @media blokas prideda pakeitimus platesniam. */
+
+/* ---------- 1. Kintamieji ----------
+   Spalvos ir dydžiai aprašyti vienoje vietoje. Pakeitus čia, pasikeičia visur. */
+:root {
+  --spalva-fonas: #f4f6f8;
+  --spalva-pavirsius: #ffffff;
+  --spalva-tekstas: #1c2430;
+  --spalva-tekstas-blankus: #5b6675;
+  --spalva-akcentas: #0b6e4f;
+  --spalva-akcentas-tamsus: #084c37;
+  --spalva-rememis: #d5dbe3;
+  --spalva-teigiama: #0b6e4f;
+  --spalva-neigiama: #b3261e;
+
+  --tarpas-s: 0.5rem;
+  --tarpas-m: 1rem;
+  --tarpas-l: 1.5rem;
+  --kampas: 0.75rem;
+  --plotis-turinio: 44rem;
+}
+
+/* ---------- 2. Pagrindas ---------- */
+
+/* Plotis ir aukštis skaičiuojami kartu su paraštėmis ir rėmeliu – taip lengviau išdėstyti. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: var(--tarpas-m);
+  max-width: var(--plotis-turinio);
+  background: var(--spalva-fonas);
+  color: var(--spalva-tekstas);
+  /* Sisteminiai šriftai: nieko nereikia siųstis iš interneto. */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1,
+h2 {
+  line-height: 1.2;
+  margin: 0 0 var(--tarpas-s);
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-top: var(--tarpas-l);
+}
+
+p {
+  margin: 0 0 var(--tarpas-m);
+}
+
+a {
+  color: var(--spalva-akcentas);
+}
+
+a:hover {
+  color: var(--spalva-akcentas-tamsus);
+}
+
+/* Aiškiai matomas rėmelis, kai naršoma klaviatūra (Tab klavišu). */
+:focus-visible {
+  outline: 3px solid var(--spalva-akcentas);
+  outline-offset: 2px;
+}
+
+header {
+  margin-bottom: var(--tarpas-l);
+}
+
+footer {
+  margin-top: var(--tarpas-l);
+  padding-top: var(--tarpas-m);
+  border-top: 1px solid var(--spalva-rememis);
+  color: var(--spalva-tekstas-blankus);
+  font-size: 0.875rem;
+}
+
+.blankus {
+  color: var(--spalva-tekstas-blankus);
+}
+
+/* ---------- 3. Kortelės ---------- */
+
+.kortele {
+  display: block;
+  padding: var(--tarpas-m);
+  background: var(--spalva-pavirsius);
+  border: 1px solid var(--spalva-rememis);
+  border-radius: var(--kampas);
+}
+
+/* Kortelių sąrašas: telefone viena po kita. */
+.korteles {
+  display: grid;
+  gap: var(--tarpas-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Kortelė, kuri pati yra nuoroda (pradiniame puslapyje). */
+a.kortele {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.kortele:hover {
+  border-color: var(--spalva-akcentas);
+}
+
+.kortele-pavadinimas {
+  display: block;
+  color: var(--spalva-akcentas);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* ---------- 4. Mygtukai ir laukai ---------- */
+
+button,
+input,
+select {
+  /* Formų elementai patys šrifto nepaveldi, todėl nurodome. */
+  font: inherit;
+}
+
+button,
+.mygtukas {
+  display: inline-block;
+  /* Bent 44 px aukščio – patogu paspausti pirštu. */
+  min-height: 2.75rem;
+  padding: var(--tarpas-s) var(--tarpas-m);
+  background: var(--spalva-akcentas);
+  color: #ffffff;
+  border: 1px solid var(--spalva-akcentas);
+  border-radius: var(--kampas);
+  cursor: pointer;
+}
+
+button:hover,
+.mygtukas:hover {
+  background: var(--spalva-akcentas-tamsus);
+}
+
+/* Antraeilis mygtukas: tik rėmelis. */
+button.antrinis {
+  background: transparent;
+  color: var(--spalva-akcentas);
+}
+
+button.antrinis:hover {
+  background: var(--spalva-pavirsius);
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--tarpas-s);
+  background: var(--spalva-pavirsius);
+  color: var(--spalva-tekstas);
+  border: 1px solid var(--spalva-rememis);
+  border-radius: 0.5rem;
+}
+
+/* ---------- 5. Testų puslapis ---------- */
+
+.testu-suvestine {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.testu-sarasas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.testu-sarasas li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--spalva-rememis);
+}
+
+.testas-pavyko {
+  color: var(--spalva-teigiama);
+}
+
+.testas-nepavyko {
+  color: var(--spalva-neigiama);
+  font-weight: 600;
+}
+
+/* ---------- 6. Biudžetas ---------- */
+
+/* Eilutė: pavadinimas kairėje, suma dešinėje. */
+.eilute {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--tarpas-m);
+}
+
+.suma {
+  /* Suma niekada neperkeliama per dvi eilutes, o skaitmenys vienodo pločio –
+     tada sumos stulpelyje gražiai lygiuojasi. */
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.dalies-antraste {
+  margin-top: var(--tarpas-l);
+  margin-bottom: var(--tarpas-s);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.dalies-antraste h2 {
+  margin: 0;
+}
+
+.kategorija {
+  margin-bottom: var(--tarpas-m);
+}
+
+.kategorijos-antraste {
+  padding-bottom: var(--tarpas-s);
+  border-bottom: 1px solid var(--spalva-rememis);
+  font-weight: 600;
+}
+
+.kategorijos-antraste h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+}
+
+.eilutes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eilutes .eilute {
+  padding: var(--tarpas-s) 0;
+}
+
+/* Plona linija tarp eilučių, bet ne po paskutinės. */
+.eilutes .eilute + .eilute {
+  border-top: 1px solid var(--spalva-fonas);
+}
+
+/* Redagavimas: laukai vienoje eilutėje – pavadinimas, suma, trynimo mygtukas. */
+.eilutes-laukai {
+  display: flex;
+  align-items: center;
+  gap: var(--tarpas-s);
+}
+
+.eilutes li {
+  padding: var(--tarpas-s) 0;
+}
+
+/* Pavadinimas užima visą likusį plotį; min-width: 0 leidžia jam susitraukti telefone. */
+input.laukas-pavadinimas {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
+input.laukas-kategorija {
+  font-weight: 600;
+}
+
+input.laukas-suma {
+  flex: 0 0 6.5rem;
+  width: 6.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+button.mygtukas-trinti {
+  flex: 0 0 2.75rem;
+  width: 2.75rem;
+  padding: 0;
+  color: var(--spalva-neigiama);
+  border-color: var(--spalva-rememis);
+}
+
+/* Antra eilutės dalis: periodiškumas kairėje, suma per mėnesį dešinėje. */
+.eilutes-papildoma {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tarpas-s);
+  margin-top: var(--tarpas-s);
+  font-size: 0.875rem;
+}
+
+/* Pasirinkimai pasidalija likusį plotį ir, jei reikia, susitraukia – kad viskas tilptų vienoje eilutėje. */
+select.laukas-pasirinkimas {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  /* Plačiame ekrane sąrašas neišsitempia per visą eilutę. */
+  max-width: 10rem;
+}
+
+/* „= … per mėn.“ – atskiroje eilutėje dešinėje; kai teksto nėra, vietos neužima. */
+.eilutes-ekvivalentas {
+  display: block;
+  font-size: 0.875rem;
+}
+
+.eilutes-ekvivalentas:not(:empty) {
+  margin-top: 0.25rem;
+}
+
+/* Antroje eilutėje esantys laukai – įprasto dydžio raidėmis (pati eilutė smulkesnė) ir kompaktiškesni. */
+.eilutes-papildoma input.laukas-suma,
+.eilutes-papildoma select {
+  font-size: 1rem;
+}
+
+.eilutes-papildoma input.laukas-suma {
+  flex: 0 0 6rem;
+  width: 6rem;
+}
+
+.eilutes-papildoma select.laukas-pasirinkimas {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+/* Suma per mėnesį visada prie dešinio krašto. */
+.eilutes-papildoma .suma {
+  margin-left: auto;
+}
+
+/* 50/30/20 taisyklės kortelė. */
+.taisykle {
+  margin-top: var(--tarpas-l);
+}
+
+.taisykle h2 {
+  margin-top: 0;
+}
+
+.taisykles-dalis {
+  margin-bottom: var(--tarpas-m);
+}
+
+/* Juosta: pilkas takelis, spalvotas užpildas ir tamsus brūkšnelis ties tikslu. */
+.juosta {
+  position: relative;
+  height: 0.75rem;
+  margin: var(--tarpas-s) 0;
+  background: var(--spalva-fonas);
+  border-radius: 999px;
+}
+
+.juostos-uzpildas {
+  height: 100%;
+  background: var(--spalva-teigiama);
+  border-radius: 999px;
+}
+
+.juostos-uzpildas-blogai {
+  background: var(--spalva-neigiama);
+}
+
+.juostos-tikslas {
+  position: absolute;
+  top: -0.25rem;
+  bottom: -0.25rem;
+  width: 2px;
+  background: var(--spalva-tekstas);
+}
+
+.taisykles-vertinimas {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* Suvestinė viršuje: trys stulpeliai, prilimpa prie ekrano viršaus slenkant. */
+.suvestine {
+  position: sticky;
+  top: 0;
+  /* z-index – kad slenkant kortelės palįstų po suvestine, o ne virš jos. */
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--tarpas-s);
+  margin-bottom: var(--tarpas-m);
+  padding: var(--tarpas-s) var(--tarpas-m);
+  background: var(--spalva-pavirsius);
+  border: 1px solid var(--spalva-rememis);
+  border-radius: var(--kampas);
+  box-shadow: 0 2px 6px rgba(28, 36, 48, 0.12);
+  text-align: center;
+}
+
+.suvestines-pavadinimas {
+  display: block;
+  color: var(--spalva-tekstas-blankus);
+  font-size: 0.75rem;
+}
+
+.suvestines-reiksme {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pajamų laukas suvestinėje: atrodo kaip kiti skaičiai, bet su rėmeliu – matyti, kad galima rašyti. */
+input.suvestines-laukas {
+  width: 100%;
+  min-height: 2rem;
+  padding: 0 0.25rem;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  border-color: var(--spalva-akcentas);
+}
+
+.teigiama {
+  color: var(--spalva-teigiama);
+}
+
+.neigiama {
+  color: var(--spalva-neigiama);
+}
+
+/* Skirtukai puslapio viršuje. */
+.skirtukai {
+  display: flex;
+  gap: var(--tarpas-s);
+  margin-bottom: var(--tarpas-m);
+}
+
+button.skirtukas {
+  flex: 1 1 0;
+  /* Siauresnės paraštės – kad trys skirtukai tilptų telefono ekrane. */
+  padding: var(--tarpas-s) 0.25rem;
+  background: var(--spalva-pavirsius);
+  color: var(--spalva-akcentas);
+  border-color: var(--spalva-rememis);
+}
+
+/* Aktyvus skirtukas – užpildytas. [aria-selected="true"] parenka elementą pagal atributo reikšmę. */
+button.skirtukas[aria-selected="true"],
+button.skirtukas[aria-pressed="true"] {
+  background: var(--spalva-akcentas);
+  color: #ffffff;
+  border-color: var(--spalva-akcentas);
+}
+
+/* Atributas hidden turi paslėpti elementą, net jei kita taisyklė jam nustato display. */
+[hidden] {
+  display: none !important;
+}
+
+/* Mėnesio pasirinkimas: rodyklės kraštuose, pavadinimas viduryje. */
+.menesio-navigacija {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tarpas-s);
+  margin-bottom: var(--tarpas-m);
+}
+
+.menesio-navigacija h2 {
+  margin: 0;
+  text-align: center;
+}
+
+/* Kategorijos pavadinimas mėnesio eilutėje užima likusį plotį. */
+.menesio-kategorija {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.pastaba {
+  margin: var(--tarpas-s) 0 0;
+  font-size: 0.875rem;
+}
+
+.veiksmai button {
+  margin-bottom: var(--tarpas-s);
+}
+
+/* Lentelės (metų apžvalga). Mažesnis šriftas, kad keturi stulpeliai tilptų telefone. */
+.lenteles-remelis {
+  overflow-x: auto;
+  padding: var(--tarpas-s);
+}
+
+.lentele {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.lentele th,
+.lentele td {
+  padding: 0.375rem 0.25rem;
+  border-bottom: 1px solid var(--spalva-fonas);
+  text-align: left;
+  font-weight: normal;
+}
+
+.lentele thead th {
+  color: var(--spalva-tekstas-blankus);
+  border-bottom: 1px solid var(--spalva-rememis);
+}
+
+/* Skaičių stulpeliai lygiuojami dešinėje, vienodo pločio skaitmenimis. */
+.lentele .skaicius {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.lentele tfoot th,
+.lentele tfoot td {
+  border-top: 2px solid var(--spalva-rememis);
+  border-bottom: none;
+  font-weight: 600;
+}
+
+.lentele .lenteles-grupe th {
+  padding-top: var(--tarpas-m);
+  font-weight: 600;
+}
+
+/* Ilgas pavadinimas perkeliamas į kitą eilutę ties tarpais; tik labai ilgas žodis laužiamas. */
+.lentele .lenteles-pavadinimas {
+  overflow-wrap: break-word;
+}
+
+/* Stulpelių antraštės gali užimti dvi eilutes – tada skaičių stulpeliai siauresni
+   ir pirmam stulpeliui lieka daugiau vietos. */
+.lentele thead .skaicius {
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+/* Mygtukas, kuris atrodo kaip nuoroda (mėnesio pavadinimas lentelėje). */
+button.nuoroda {
+  min-height: 2rem;
+  padding: 0;
+  background: none;
+  color: var(--spalva-akcentas);
+  border: none;
+  border-radius: 0;
+  text-decoration: underline;
+}
+
+button.nuoroda:hover {
+  background: none;
+  color: var(--spalva-akcentas-tamsus);
+}
+
+/* Atsarginės kopijos kortelė. */
+.kopijos {
+  margin-top: var(--tarpas-l);
+}
+
+.kopijos h2 {
+  margin-top: 0;
+}
+
+.kopijos .veiksmai {
+  margin-top: var(--tarpas-s);
+  margin-bottom: 0;
+}
+
+/* Forma (investavimo įvestys): telefone laukai vienas po kito. */
+.forma {
+  display: grid;
+  gap: var(--tarpas-m);
+}
+
+.formos-laukas label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.korteles-antraste {
+  margin-top: 0;
+}
+
+/* Įspėjimas (pvz. „pasitikrinkite VMI“): geltonas fonas ir kraštinė, kad nebūtų pražiūrėtas. */
+.ispejimas {
+  margin: var(--tarpas-m) 0 var(--tarpas-s);
+  padding: var(--tarpas-s) var(--tarpas-m);
+  background: #fff7e0;
+  border-left: 4px solid #c98500;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.nuorodu-sarasas {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+}
+
+.nuorodu-sarasas li {
+  padding: 0.375rem 0;
+}
+
+/* Paryškinta lentelės eilutė (galutinis rezultatas). */
+.lentele .lenteles-ryski th,
+.lentele .lenteles-ryski td {
+  font-weight: 600;
+}
+
+/* Įmokų žurnalas: data kairėje, suma dešinėje, trynimo mygtukas gale. */
+.zurnalo-suvestine {
+  margin-top: var(--tarpas-m);
+  padding-top: var(--tarpas-m);
+  border-top: 1px solid var(--spalva-rememis);
+}
+
+.zurnalo-suvestine p {
+  margin-bottom: var(--tarpas-s);
+}
+
+.zurnalo-data {
+  flex: 1 1 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.eilutes .zurnalo-irasas + .zurnalo-irasas {
+  border-top: 1px solid var(--spalva-fonas);
+}
+
+/* Tarpas tarp laukų grupių kortelių. */
+.formos-grupe {
+  margin-top: var(--tarpas-m);
+}
+
+/* ---------- Grafikas ---------- */
+
+/* Linijų spalvos. Kiekviena klasė nustato kintamąjį, kurį naudoja ir linija, ir legendos ženklas.
+   Spalvos parinktos taip, kad skirtųsi ir žmonėms, kurie blogiau skiria spalvas. */
+.serija-1 {
+  --serijos-spalva: #2a78d6;
+}
+
+.serija-2 {
+  --serijos-spalva: #eb6834;
+}
+
+.serija-3 {
+  --serijos-spalva: #1baf7a;
+}
+
+/* position: relative – kad paaiškinimo blokas būtų dėliojamas šio rėmelio atžvilgiu. */
+.grafiko-remelis {
+  position: relative;
+}
+
+.grafiko-remelis svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Telefone leidžia slinkti puslapį aukštyn ir žemyn net pradėjus braukti nuo grafiko. */
+  touch-action: pan-y;
+}
+
+/* Tinklelis ir ašys – blankūs, kad neužgožtų duomenų. */
+.grafiko-tinklelis {
+  stroke: var(--spalva-rememis);
+  stroke-width: 1;
+}
+
+.grafiko-pagrindas {
+  stroke: var(--spalva-tekstas-blankus);
+}
+
+.grafiko-asies-tekstas {
+  fill: var(--spalva-tekstas-blankus);
+  font-size: 11px;
+}
+
+.grafiko-linija {
+  fill: none;
+  stroke: var(--serijos-spalva);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* Įmokėtos sumos linija – pilka punktyrinė. */
+.grafiko-atrama {
+  fill: none;
+  stroke: var(--spalva-tekstas-blankus);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+/* Taškai su baltu apvadu – kad išsiskirtų ten, kur linijos susikerta. */
+.grafiko-taskas {
+  fill: var(--serijos-spalva);
+  stroke: var(--spalva-pavirsius);
+  stroke-width: 2;
+}
+
+.grafiko-taskas-atrama {
+  fill: var(--spalva-tekstas-blankus);
+}
+
+/* Užrašai linijų galuose – teksto, ne linijos spalva. */
+.grafiko-zyme {
+  fill: var(--spalva-tekstas);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.grafiko-zymeklio-linija {
+  stroke: var(--spalva-tekstas-blankus);
+  stroke-width: 1;
+}
+
+.grafiko-paaiskinimas {
+  position: absolute;
+  top: 0.25rem;
+  min-width: 10.5rem;
+  padding: var(--tarpas-s);
+  background: var(--spalva-pavirsius);
+  border: 1px solid var(--spalva-rememis);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(28, 36, 48, 0.16);
+  font-size: 0.8125rem;
+  /* Paaiškinimas „nepagauna“ pelės – kitaip užvedus ant jo žymeklis šokinėtų. */
+  pointer-events: none;
+}
+
+.paaiskinimo-eilute {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--tarpas-m);
+  /* Ženklas ir pavadinimas lieka vienoje eilutėje. */
+  white-space: nowrap;
+}
+
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem var(--tarpas-m);
+  margin: 0 0 var(--tarpas-s);
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+/* Legendos ženklas – trumpas brūkšnelis linijos spalva. */
+.legendos-zenklas {
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.375rem;
+  border-top: 3px solid var(--serijos-spalva);
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+.legendos-zenklas-atrama {
+  border-top: 2px dashed var(--spalva-tekstas-blankus);
+  border-radius: 0;
+}
+
+.isskleidziama {
+  margin-top: var(--tarpas-s);
+}
+
+.isskleidziama summary {
+  /* Bent 44 px aukščio – patogu paspausti pirštu. */
+  padding: 0.75rem 0;
+  color: var(--spalva-akcentas);
+  cursor: pointer;
+}
+
+/* Laukas su klaida – raudonas rėmelis. */
+input[aria-invalid="true"] {
+  border-color: var(--spalva-neigiama);
+  border-width: 2px;
+}
+
+.klaidos-tekstas {
+  margin: var(--tarpas-s) 0 0;
+  color: var(--spalva-neigiama);
+  font-size: 0.875rem;
+}
+
+.veiksmai {
+  margin-top: var(--tarpas-l);
+}
+
+/* ---------- 7. Platesni ekranai ----------
+   Kai ekranas platesnis nei 40rem (~640 px), kortelės rikiuojamos po dvi. */
+@media (min-width: 40rem) {
+  body {
+    padding: var(--tarpas-l);
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .korteles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Platesniame ekrane formos laukai rikiuojami po du. */
+  .forma {
+    grid-template-columns: 1fr 1fr;
+  }
+}

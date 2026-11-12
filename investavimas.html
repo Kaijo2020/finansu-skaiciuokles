@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Prašome paieškos sistemų šio puslapio nerodyti – svetainė skirta šeimai. -->
+  <meta name="robots" content="noindex">
+  <!-- Piktograma naršyklės skirtuke, nupiešta čia pat (SVG), be atskiro failo. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b6e4f'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+  <title>Investavimas – Finansų skaičiuoklės</title>
+  <link rel="stylesheet" href="css/stilius.css">
+</head>
+<body>
+  <header>
+    <p><a href="index.html">← Į pradžią</a></p>
+    <h1>Investavimas</h1>
+    <p class="blankus">Kiek galėtų būti verta, jei kas mėnesį investuotumėte tą pačią sumą.</p>
+  </header>
+
+  <main>
+    <!-- Rezultatai viršuje – prilimpa prie ekrano viršaus, todėl keičiant įvestis jie visada matomi. -->
+    <div class="suvestine" role="group" aria-label="Prognozės rezultatai">
+      <div>
+        <span class="suvestines-pavadinimas">Įmokėta</span>
+        <span id="rez-imoketa" class="suvestines-reiksme">–</span>
+      </div>
+      <div>
+        <span class="suvestines-pavadinimas">Vertė (vidutinė)</span>
+        <span id="rez-verte" class="suvestines-reiksme">–</span>
+      </div>
+      <div>
+        <span class="suvestines-pavadinimas">Prieaugis</span>
+        <span id="rez-prieaugis" class="suvestines-reiksme">–</span>
+      </div>
+    </div>
+    <p id="rez-sakinys"></p>
+
+    <h2>Trys scenarijai</h2>
+    <!-- Lentelę čia sukuria js/investavimas.js. -->
+    <div id="scenarijai" class="kortele lenteles-remelis"></div>
+    <p id="scenariju-pastaba" class="blankus pastaba"></p>
+
+    <h2>Po GPM</h2>
+    <p class="blankus">
+      Kiek liktų, jei laikotarpio pabaigoje viską parduotumėte vienu kartu. Palyginami du režimai:
+      paprasta sąskaita ir investicinė sąskaita.
+    </p>
+    <!-- Lentelę čia sukuria js/investavimas.js. -->
+    <div id="gpm-lentele" class="kortele lenteles-remelis"></div>
+    <p class="blankus pastaba">
+      Šioje prognozėje perkamas ir laikomas vienas fondas, todėl paprasta sąskaita atrodo palankesnė
+      lengvatos dydžiu. Investicinės sąskaitos nauda – galimybė keisti investicijas jos viduje nemokant GPM,
+      kol pinigai neišimami – čia nematoma. Parduodant dalimis per kelerius metus, lengvata paprastoje
+      sąskaitoje būtų taikoma kasmet. Tarifus rasite ir pakeisite žemiau, grupėje „Gyventojų pajamų mokestis“.
+    </p>
+
+    <h2>Vertė per metus</h2>
+    <div class="kortele">
+      <!-- Legendą, grafiką ir lentelę čia sukuria js/grafikas.js ir js/investavimas.js. -->
+      <ul id="grafiko-legenda" class="legenda"></ul>
+      <div id="grafikas" class="grafiko-remelis"></div>
+      <p class="blankus pastaba">
+        Užveskite pelę arba palieskite grafiką – pamatysite tų metų sumas.
+      </p>
+      <!-- <details> – išskleidžiamas blokas: turinys matomas tik paspaudus <summary>. -->
+      <details class="isskleidziama">
+        <summary>Rodyti lentelę pagal metus</summary>
+        <div id="metu-lentele" class="lenteles-remelis"></div>
+      </details>
+    </div>
+
+    <!-- Įvedimo laukus (sugrupuotus kortelėmis) čia sukuria js/investavimas.js iš sąrašo INVESTAVIMO_LAUKAI. -->
+    <div id="investavimo-laukai"></div>
+
+    <!-- Įmokų žurnalas: realiai investuotos sumos. Sąrašą ir suvestinę užpildo js/investavimas.js. -->
+    <section class="kortele formos-grupe">
+      <h2 class="korteles-antraste">Įmokų žurnalas</h2>
+      <p class="blankus">
+        Čia įrašykite, kiek ir kada iš tikrųjų investavote. Kai žurnale yra įmokų, prognozė tęsiama nuo jų.
+      </p>
+
+      <div class="forma">
+        <div class="formos-laukas">
+          <label for="zurnalo-data">Data</label>
+          <!-- type="date" – naršyklė pati parodo kalendorių. -->
+          <input id="zurnalo-data" type="date">
+        </div>
+        <div class="formos-laukas">
+          <label for="zurnalo-suma">Įmokos suma, €</label>
+          <input id="zurnalo-suma" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+      </div>
+      <p id="zurnalo-klaida" class="klaidos-tekstas" hidden></p>
+      <p class="veiksmai">
+        <button id="zurnalo-prideti" type="button">Pridėti įmoką</button>
+      </p>
+
+      <div class="formos-laukas">
+        <label for="dabartine-verte">Dabartinė portfelio vertė, € (nebūtina)</label>
+        <input id="dabartine-verte" type="text" inputmode="decimal" autocomplete="off">
+        <p class="blankus pastaba">
+          Kiek visos jūsų investicijos vertos šiandien. Jei paliksite tuščią, bus laikoma, kad jos vertos tiek, kiek įmokėjote.
+        </p>
+        <p id="dabartines-klaida" class="klaidos-tekstas" hidden></p>
+      </div>
+
+      <div id="zurnalo-suvestine" class="zurnalo-suvestine"></div>
+      <ul id="zurnalo-sarasas" class="eilutes"></ul>
+    </section>
+
+    <!-- Atsarginė kopija: įvestys ir žurnalas viename faile. -->
+    <section class="kortele kopijos">
+      <h2>Atsarginė kopija</h2>
+      <p class="blankus">
+        Įvestys ir įmokų žurnalas laikomi tik šioje naršyklėje. Išvalius naršyklės duomenis jie dingtų,
+        todėl kartais išsaugokite kopiją. Ta pačia kopija duomenis galima perkelti į kitą įrenginį.
+      </p>
+      <p class="veiksmai">
+        <button id="eksportuoti" type="button">Išsaugoti kopiją</button>
+        <button id="importuoti" type="button" class="antrinis">Atkurti iš kopijos…</button>
+        <!-- Paslėptas failo pasirinkimo laukas; jį atidaro mygtukas „Atkurti iš kopijos“. -->
+        <input id="importo-failas" type="file" accept=".json,application/json" hidden>
+      </p>
+      <p class="veiksmai">
+        <button id="csv-zurnalas" type="button" class="antrinis">Žurnalas į „Excel“ (CSV)</button>
+        <button id="csv-prognoze" type="button" class="antrinis">Prognozė į „Excel“ (CSV)</button>
+      </p>
+      <p id="kopijos-busena" role="status"></p>
+    </section>
+
+    <p id="busena" class="blankus" role="status"></p>
+
+    <p class="veiksmai">
+      <button id="atkurti-investavima" type="button" class="antrinis">Grąžinti pradines reikšmes</button>
+    </p>
+
+    <p class="blankus pastaba">
+      Tai supaprastinta prognozė su pastovia grąža. Tikra grąža kasmet svyruoja, gali būti ir neigiama,
+      ir niekas jos negarantuoja. Skaičiuoklė nėra investavimo patarimas.
+    </p>
+  </main>
+
+  <script src="js/bendra.js"></script>
+  <script src="js/grafikas.js"></script>
+  <script src="js/investavimas.js"></script>
+  <script>
+    paleistiInvestavima();
+  </script>
+</body>
+</html>

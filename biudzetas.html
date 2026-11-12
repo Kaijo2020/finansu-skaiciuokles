@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Prašome paieškos sistemų šio puslapio nerodyti – svetainė skirta šeimai. -->
+  <meta name="robots" content="noindex">
+  <!-- Piktograma naršyklės skirtuke, nupiešta čia pat (SVG), be atskiro failo. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b6e4f'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+  <title>Mėnesio biudžetas – Finansų skaičiuoklės</title>
+  <link rel="stylesheet" href="css/stilius.css">
+</head>
+<body>
+  <header>
+    <p><a href="index.html">← Į pradžią</a></p>
+    <h1>Mėnesio biudžetas</h1>
+  </header>
+
+  <main>
+    <!-- Skirtukai: mygtukai, kurie perjungia žemiau esančias skiltis. -->
+    <div class="skirtukai" role="tablist" aria-label="Biudžeto skiltys">
+      <button id="skirtukas-biudzetas" type="button" class="skirtukas" role="tab" aria-controls="skiltis-biudzetas">Biudžetas</button>
+      <button id="skirtukas-menesiai" type="button" class="skirtukas" role="tab" aria-controls="skiltis-menesiai">Mėnesiai</button>
+      <button id="skirtukas-metai" type="button" class="skirtukas" role="tab" aria-controls="skiltis-metai">Metai</button>
+    </div>
+
+    <!-- Pranešimas apie išsaugojimą. role="status" – ekrano skaitytuvas perskaito pasikeitusį tekstą. -->
+    <p id="busena" class="blankus" role="status"></p>
+
+    <!-- 1 skiltis: biudžetas (planas vienam mėnesiui). -->
+    <div id="skiltis-biudzetas" role="tabpanel" aria-labelledby="skirtukas-biudzetas">
+      <!-- Suvestinė. CSS taisyklė „position: sticky“ ją prilipdo prie ekrano viršaus slenkant. -->
+      <div class="suvestine" role="group" aria-label="Mėnesio suvestinė">
+        <div>
+          <!-- Pajamos – įvedimo laukas: sumą galima įrašyti tiesiai čia. <label> susieja užrašą su lauku. -->
+          <label class="suvestines-pavadinimas" for="suvestine-pajamos">Pajamos ✎</label>
+          <input id="suvestine-pajamos" class="suvestines-laukas" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div>
+          <label class="suvestines-pavadinimas" for="suvestine-islaidos">Išlaidos ✎</label>
+          <input id="suvestine-islaidos" class="suvestines-laukas" type="text" inputmode="decimal" autocomplete="off">
+        </div>
+        <div>
+          <span class="suvestines-pavadinimas">Likutis</span>
+          <span id="suvestine-likutis" class="suvestines-reiksme">–</span>
+        </div>
+      </div>
+      <p id="suvestine-klaida" class="klaidos-tekstas" hidden></p>
+      <p class="blankus">
+        Pajamas ir išlaidas galite įrašyti tiesiai viršuje arba išskaidyti eilutėmis žemiau. Visos sumos – per mėnesį.
+      </p>
+
+      <!-- Tuščia vieta, kurią užpildo js/biudzetas.js. -->
+      <div id="biudzetas"></div>
+
+      <section class="kortele taisykle">
+        <h2>50/30/20 taisyklė</h2>
+        <p class="blankus">
+          Orientyras, kaip paskirstyti pajamas: 50 % būtinoms išlaidoms, 30 % norams, 20 % taupymui.
+          Brūkšnelis juostoje žymi tikslą.
+        </p>
+        <!-- Šią vietą užpildo js/biudzetas.js. -->
+        <div id="taisykle"></div>
+      </section>
+
+      <p class="veiksmai">
+        <button id="isvalyti" type="button" class="antrinis">Išvalyti sumas</button>
+        <button id="atkurti" type="button" class="antrinis">Grąžinti pavyzdinį biudžetą</button>
+      </p>
+    </div>
+
+    <!-- 2 skiltis: mėnesiai (planas ir faktas). Atributas hidden paslepia bloką, kol jis nepasirinktas. -->
+    <div id="skiltis-menesiai" role="tabpanel" aria-labelledby="skirtukas-menesiai" hidden>
+      <p class="blankus">
+        Kiekvieno mėnesio pabaigoje įveskite, kiek iš tikrųjų gavote ir išleidote pagal kategorijas.
+      </p>
+      <!-- Šią vietą užpildo js/menesiai.js. -->
+      <div id="menesis"></div>
+    </div>
+
+    <!-- 3 skiltis: metų apžvalga. -->
+    <div id="skiltis-metai" role="tabpanel" aria-labelledby="skirtukas-metai" hidden>
+      <!-- Šią vietą užpildo js/metai.js. -->
+      <div id="metai"></div>
+    </div>
+
+    <!-- Atsarginė kopija – matoma visose skiltyse. -->
+    <section class="kortele kopijos">
+      <h2>Atsarginė kopija</h2>
+      <p class="blankus">
+        Visi duomenys laikomi tik šioje naršyklėje. Išvalius naršyklės duomenis jie dingtų, todėl
+        kartais išsaugokite kopiją. Ta pačia kopija duomenis galima perkelti į kitą įrenginį.
+      </p>
+      <p class="veiksmai">
+        <button id="eksportuoti" type="button">Išsaugoti kopiją</button>
+        <button id="importuoti" type="button" class="antrinis">Atkurti iš kopijos…</button>
+        <!-- Paslėptas failo pasirinkimo laukas; jį atidaro mygtukas „Atkurti iš kopijos“. -->
+        <input id="importo-failas" type="file" accept=".json,application/json" hidden>
+      </p>
+      <p class="veiksmai">
+        <button id="csv-biudzetas" type="button" class="antrinis">Biudžetas į „Excel“ (CSV)</button>
+        <button id="csv-menesiai" type="button" class="antrinis">Mėnesiai į „Excel“ (CSV)</button>
+      </p>
+      <p id="kopijos-busena" role="status"></p>
+    </section>
+  </main>
+
+  <script src="js/bendra.js"></script>
+  <script src="js/biudzetas.js"></script>
+  <script src="js/menesiai.js"></script>
+  <script src="js/metai.js"></script>
+  <script src="js/kopijos.js"></script>
+  <script>
+    paleistiBiudzeta();
+  </script>
+</body>
+</html>

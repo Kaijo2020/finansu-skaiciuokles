@@ -1,0 +1,18 @@
+# Failai, kurie į GitHub NEKELIAMI.
+# Kiekviena eilutė – failo vardo šablonas; * reiškia „bet kas“.
+
+# Atsarginės kopijos ir eksportai – juose gali būti tikros jūsų sumos.
+biudzetas-*.json
+investavimas-*.json
+biudzetas-*.csv
+biudzeto-menesiai-*.csv
+investavimo-*.csv
+
+# Pagalbiniai kūrimo įrankio failai (peržiūros serveris) – ne svetainės dalis.
+.claude/
+
+# Sistemos ir redaktorių šiukšlės.
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
